@@ -5,6 +5,6 @@ Start
 
 `docker compose  up -d `
 
-to run migration `docker-compose exec da npm exec knex migrate:up`
+to run migration `docker-compose exec ef npm exec knex migrate:up`
 
 update
