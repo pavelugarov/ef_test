@@ -1,0 +1,32 @@
+version: '3.8'
+services:  
+  ef_db:
+    image: postgres:latest
+    container_name: ef_db
+    env_file:
+      - ./.env
+    ports:
+      - 5439:5432
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    networks:
+      - ef_net
+  
+  da:
+    image: da-back
+    container_name: da
+    env_file: ./.env
+    ports:
+      - 3300:3000
+    depends_on:
+      - ef_db
+    restart: unless-stopped
+    networks:
+      - ef_net
+  
+volumes:
+  dbdata:
+
+networks:
+  ef_net:
+    name: ef_net
